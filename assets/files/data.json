@@ -1,0 +1,54 @@
+{
+  "questions": [
+    {
+      "question": "f(x)=2x+5 what is the gradient",
+      "answer": "2",
+      "answers": ["2", "4", "6", "8"]
+    },
+    {
+      "question": "calculate 5*2+5+tan 45",
+      "answer": "16",
+      "answers": ["14", "12", "16", "18"]
+    },
+    {
+      "question": "f(x)=6x+5 what is the gradient",
+      "answer": "6",
+      "answers": ["2", "4", "6", "8"]
+    },
+    {
+      "question": "f(x)=7x+5 what is the y-intercept",
+      "answer": "5",
+      "answers": ["2", "4", "5", "6"]
+    },
+    {
+      "question": "f(x)=7x+5 what is the gradient - y-intercept",
+      "answer": "2",
+      "answers": ["2", "4", "6", "8"]
+    },
+    {
+      "question": "f(x)=2x+5 what is the x-intercept",
+      "answer": "-2.5",
+      "answers": ["-2", "2.5", "-3.5", "-2.5"]
+    },
+    {
+      "question": "f(x)=10x+5 what is the x-intercept",
+      "answer": "-0.5",
+      "answers": ["-0.2", "0.5", "0.2", "-0.5"]
+    },
+    {
+      "question": "f(x)=20x+5 what is the x-intercept",
+      "answer": "-0.25",
+      "answers": ["0.25", "0.5", "-0.25", "-0.5"]
+    },
+    {
+      "question": "f(x)=10x+20 what is the x-intercept + gradient",
+      "answer": "${-(20 / 10) + 20}",
+      "answers": ["16", "18", "16", "-18"]
+    },
+    {
+      "question": "f(x)=14x-7 what is the x-intercept + y-intercept",
+      "answer": "7.5",
+      "answers": ["0.5", "7.5", "-0.5", "-7.5"]
+    }
+  ]
+}
