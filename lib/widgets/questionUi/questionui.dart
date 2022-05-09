@@ -6,8 +6,13 @@ import '../my_ans_btn.dart';
 class QuestionUi extends StatelessWidget {
   final Question question;
   final Function next;
+  final int qNum;
 
-  const QuestionUi({Key? key, required this.question, required this.next})
+  const QuestionUi(
+      {Key? key,
+      required this.question,
+      required this.next,
+      required this.qNum})
       : super(key: key);
 
   @override
@@ -22,9 +27,32 @@ class QuestionUi extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
-              child: _QuestionWidget(
-            text: questionText,
-          )),
+            child: Stack(
+              children: [
+                _QuestionWidget(
+                  text: questionText,
+                ),
+                Positioned(
+                  // center the pic
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: CircleAvatar(
+                          backgroundColor: Colors.blue,
+                          child: Text('$qNum',
+                              style: const TextStyle(color: Colors.white))),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Expanded(
+          //     child: _QuestionWidget(
+          //   text: questionText,
+          // )),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: _AnswerWidget(answers: answers, onPressed: () => next()),

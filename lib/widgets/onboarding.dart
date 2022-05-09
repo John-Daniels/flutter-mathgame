@@ -33,27 +33,28 @@ class _OnBoardingState extends State<OnBoarding> {
 
     return Scaffold(
         appBar: AppBar(title: const Text('MathGame'), centerTitle: true),
-        body: score.toInt() >= 0
-            ? SizedBox(
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text('$score'),
-                    const Text(
-                      'Welcome to the Game!',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ElevatedButton(
-                          onPressed: startGame, child: const Text('StartGame')),
+        body: SizedBox(
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                'Welcome to the Game!',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                    onPressed: startGame, child: const Text('StartGame')),
+              ),
+              score > 0
+                  ? Column(
+                      children: [const Text('High Score'), Text('$score')],
                     )
-                  ],
-                ),
-              )
-            : const Center(child: CircularProgressIndicator()));
+                  : Container(),
+            ],
+          ),
+        ));
   }
 }

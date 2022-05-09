@@ -60,6 +60,7 @@ class _GameOverlayState extends State<GameOverlay> {
   @override
   Widget build(BuildContext context) {
     return QuestionUi(
+      qNum: index + 1,
       question: widget.questions[index],
       next: () {
         setState(() {
