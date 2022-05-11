@@ -56,17 +56,111 @@ class GameOverlay extends StatefulWidget {
 class _GameOverlayState extends State<GameOverlay> {
   int index = 0;
   int score = 0;
+  // ui stuff
+  bool loading = true;
 
   @override
   Widget build(BuildContext context) {
-    return QuestionUi(
-      qNum: index + 1,
-      question: widget.questions[index],
-      next: () {
+    List _questions = widget.questions;
+    bool finished = index < _questions.length;
+
+    load() {
+      if (finished) {
+        Future.delayed(const Duration(seconds: 3));
+
         setState(() {
-          index++;
+          loading = false;
         });
-      },
+      }
+    }
+
+    return finished
+        ? QuestionUi(
+            qIndex: index + 1,
+            question: _questions[index],
+            next: (ans, realAns) {
+              if (ans == realAns) score++;
+              index++;
+              print(score);
+              setState(() {});
+
+              load();
+            },
+          )
+        : loading
+            ? const Center(child: CircularProgressIndicator())
+            : FinishedScreen(
+                score: score,
+                maxScore: _questions.length,
+                goto: () => Navigator.of(context).pushReplacementNamed('/home'),
+                restart: () => setState(() {
+                  score = 0;
+                  index = 0;
+                }),
+              );
+  }
+}
+
+class FinishedScreen extends StatelessWidget {
+  final int score;
+  final int maxScore;
+  final goto;
+  final restart;
+
+  const FinishedScreen(
+      {Key? key,
+      required this.score,
+      required this.maxScore,
+      required this.goto,
+      required this.restart})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    //TODO: remember to add some media queries that can help set width to screen percent
+    return SizedBox(
+      width: double.infinity,
+      child: Center(
+        child: SizedBox(
+          width: 300,
+          height: 300,
+          child: Card(
+            color: Colors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text(
+                  'Score',
+                  textScaleFactor: 3,
+                  style: TextStyle(color: Color.fromARGB(255, 102, 101, 101)),
+                ),
+                Text(
+                  '$score/$maxScore',
+                  textScaleFactor: 2,
+                  // style: const TextStyle(color: Colors.grey),
+                  style: const TextStyle(
+                      color: Color.fromARGB(255, 102, 101, 101)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ButtonBar(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ElevatedButton(
+                          onPressed: () => restart(),
+                          child: const Text('replay')),
+                      ElevatedButton(
+                          onPressed: () => goto(),
+                          child: const Text('Go Back')),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

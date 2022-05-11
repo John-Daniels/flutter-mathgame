@@ -5,15 +5,15 @@ import '../my_ans_btn.dart';
 
 class QuestionUi extends StatelessWidget {
   final Question question;
-  final Function next;
-  final int qNum;
+  final int qIndex;
+  final next;
 
-  const QuestionUi(
-      {Key? key,
-      required this.question,
-      required this.next,
-      required this.qNum})
-      : super(key: key);
+  const QuestionUi({
+    Key? key,
+    required this.question,
+    required this.qIndex,
+    required this.next,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +39,22 @@ class QuestionUi extends StatelessWidget {
                     child: SizedBox(
                       width: double.infinity,
                       child: CircleAvatar(
-                          backgroundColor: Colors.blue,
-                          child: Text('$qNum',
-                              style: const TextStyle(color: Colors.white))),
+                        backgroundColor: Colors.blue,
+                        child: Text(
+                          '$qIndex',
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  right: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(3),
+                    child: IconButton(
+                      onPressed: () => null,
+                      icon: const Icon(Icons.cancel),
                     ),
                   ),
                 ),
@@ -55,7 +68,8 @@ class QuestionUi extends StatelessWidget {
           // )),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: _AnswerWidget(answers: answers, onPressed: () => next()),
+            child: _AnswerWidget(
+                answers: answers, answer: question.answer, onPressed: next),
           ),
         ],
       ),
@@ -89,21 +103,25 @@ class _QuestionWidget extends StatelessWidget {
 
 class _AnswerWidget extends StatelessWidget {
   final List answers;
-  final Function onPressed;
-  const _AnswerWidget(
-      {Key? key, required this.answers, required this.onPressed})
-      : super(key: key);
+  final String answer;
+  final onPressed;
+  const _AnswerWidget({
+    Key? key,
+    required this.answers,
+    required this.onPressed,
+    required this.answer,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        for (var answer in answers)
+        for (var _answer in answers)
           Padding(
             padding: const EdgeInsets.only(bottom: 8),
             child: MyAnsButton(
-              text: answer,
-              onPressed: () => onPressed(),
+              text: _answer,
+              onPressed: () => onPressed(_answer, answer),
             ),
           ),
       ],

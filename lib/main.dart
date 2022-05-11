@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mathgame/pages/game.dart';
 
 import 'widgets/onboarding.dart';
 
@@ -17,6 +18,10 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.system,
       home: const OnBoarding(),
+      routes: {
+        '/home': (context) => const OnBoarding(),
+        '/game': (context) => const GameScreen(),
+      },
     );
   }
 }

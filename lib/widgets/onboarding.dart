@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mathgame/models/question.dart';
 
-import '../pages/game.dart';
-
 class OnBoarding extends StatefulWidget {
   const OnBoarding({Key? key}) : super(key: key);
 
@@ -27,8 +25,8 @@ class _OnBoardingState extends State<OnBoarding> {
   @override
   Widget build(BuildContext context) {
     startGame() {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const GameScreen()));
+      // Navigator.of(context).pushReplacementNamed('/game');
+      Navigator.of(context).popAndPushNamed('/game');
     }
 
     return Scaffold(
