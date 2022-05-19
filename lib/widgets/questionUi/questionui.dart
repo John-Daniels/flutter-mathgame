@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../models/question.dart';
+import '../dialog/dialog.dart';
 import '../my_ans_btn.dart';
 
 class QuestionUi extends StatelessWidget {
@@ -39,7 +40,7 @@ class QuestionUi extends StatelessWidget {
                     child: SizedBox(
                       width: double.infinity,
                       child: CircleAvatar(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: Theme.of(context).primaryColor,
                         child: Text(
                           '$qIndex',
                           style: const TextStyle(color: Colors.white),
@@ -53,7 +54,23 @@ class QuestionUi extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(3),
                     child: IconButton(
-                      onPressed: () => null,
+                      onPressed: () {
+                        showDialog(
+                            barrierColor: Colors.black26,
+                            context: context,
+                            builder: (context) {
+                              return MyDialog(
+                                title: "Do you wanna quit!",
+                                description:
+                                    "if you quit your progress will be lost!",
+                                onQuit: () {
+                                  Navigator.of(context).pop();
+                                  Navigator.of(context)
+                                      .pushReplacementNamed('/home');
+                                },
+                              );
+                            });
+                      },
                       icon: const Icon(Icons.cancel),
                     ),
                   ),
@@ -84,8 +101,16 @@ class _QuestionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.secondary,
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(50),
+            bottomRight: Radius.circular(50),
+          ),
+          boxShadow: const [
+            BoxShadow(color: Colors.black, blurRadius: 4),
+          ]),
       width: double.infinity,
-      color: Colors.grey,
       padding: const EdgeInsets.all(12),
       child: Center(
         child: Text(

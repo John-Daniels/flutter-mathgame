@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mathgame/pages/game.dart';
+import 'package:mathgame/pages/game_screen.dart';
+import 'package:mathgame/theme/theme.dart';
 
 import 'widgets/onboarding.dart';
 
@@ -13,10 +14,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-      ),
-      themeMode: ThemeMode.system,
+      darkTheme: MyThemes.darkTheme,
+      theme: MyThemes.lightTheme,
+      themeMode: ThemeMode.light,
       home: const OnBoarding(),
       routes: {
         '/home': (context) => const OnBoarding(),

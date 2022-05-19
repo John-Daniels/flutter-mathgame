@@ -19,7 +19,7 @@ import 'dart:core';
 //   }
 // }
 main() {
-  print('running');
+  // print('running');
 }
 
 cook(String meal, Function callback) {}

@@ -1,6 +1,10 @@
 # mathgame
 
-A new Flutter project.
+## Flutter mathgame
+
+> This game saves the previous scores to the device using **_SharedPrefs_**
+
+## ![screenshot](./showcase/shot1.png "Mathgame screenshot") ![screenshot](./showcase/shot2.png "mathgame screenshot2")
 
 ## Getting Started
 

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../logic/game.dart';
 import '../models/question.dart';
 import '../widgets/questionUi/questionui.dart';
 
@@ -62,10 +63,10 @@ class _GameOverlayState extends State<GameOverlay> {
   @override
   Widget build(BuildContext context) {
     List _questions = widget.questions;
-    bool finished = index < _questions.length;
+    bool finished = !(index < _questions.length);
 
     load() {
-      if (finished) {
+      if (!(index < _questions.length)) {
         Future.delayed(const Duration(seconds: 3));
 
         setState(() {
@@ -74,22 +75,27 @@ class _GameOverlayState extends State<GameOverlay> {
       }
     }
 
-    return finished
+    _saveScore() {
+      if (!(index < _questions.length)) {
+        GameData.saveScore(score);
+      }
+    }
+
+    return finished == false
         ? QuestionUi(
             qIndex: index + 1,
             question: _questions[index],
             next: (ans, realAns) {
               if (ans == realAns) score++;
               index++;
-              print(score);
               setState(() {});
 
               load();
+              _saveScore();
             },
           )
-        : loading
-            ? const Center(child: CircularProgressIndicator())
-            : FinishedScreen(
+        : !loading
+            ? FinishedScreen(
                 score: score,
                 maxScore: _questions.length,
                 goto: () => Navigator.of(context).pushReplacementNamed('/home'),
@@ -97,7 +103,8 @@ class _GameOverlayState extends State<GameOverlay> {
                   score = 0;
                   index = 0;
                 }),
-              );
+              )
+            : const Center(child: CircularProgressIndicator());
   }
 }
 
@@ -117,6 +124,7 @@ class FinishedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screen = MediaQuery.of(context).size;
     //TODO: remember to add some media queries that can help set width to screen percent
     return SizedBox(
       width: double.infinity,
