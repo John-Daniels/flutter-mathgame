@@ -28,41 +28,56 @@ class _OnBoardingState extends State<OnBoarding> {
 
             return SizedBox(
               width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(20),
-                    child: const Text(
-                      'MathGame',
-                      textScaleFactor: 2,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text(
+                        'MathGame',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400, fontSize: 29),
+                      ),
                     ),
-                  ),
-                  SizedBox(height: screen.height * 0.3),
-                  Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        _HighScore(
-                          score: score,
+
+                    SizedBox(
+                      width: double.infinity,
+                      child: AspectRatio(
+                        aspectRatio: 16 / 9,
+                        child: Image.asset(
+                          'assets/images/math1.png',
+                          fit: BoxFit.cover,
                         ),
-                        SizedBox(
-                          height: screen.height / 100,
-                        ),
-                        const Text(
-                          'Welcome MathGurus!',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ElevatedButton(
-                              onPressed: startGame,
-                              child: const Text('StartGame')),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ],
+
+                    // SizedBox(height: screen.height * 0.3),
+                    Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          _HighScore(
+                            score: score,
+                          ),
+                          SizedBox(
+                            height: screen.height / 100,
+                          ),
+                          const Text(
+                            'Welcome MathGurus!',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ElevatedButton(
+                                onPressed: startGame,
+                                child: const Text('StartGame')),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             );
           } else {

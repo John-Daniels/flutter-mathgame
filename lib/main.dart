@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
       darkTheme: MyThemes.darkTheme,
       theme: MyThemes.lightTheme,
       themeMode: ThemeMode.light,
-      home: const OnBoarding(),
+      // home: const OnBoarding(),
+      initialRoute: '/home',
       routes: {
         '/home': (context) => const OnBoarding(),
         '/game': (context) => const GameScreen(),
